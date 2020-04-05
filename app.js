@@ -19,6 +19,17 @@
  *      index 3 - otu_labels
  */
 
+Plotly.d3.json('https://raw.githubusercontent.com/plotly/datasets/master/custom_heatmap_colorscale.json', function(figure) {
+var data = [{
+  z: figure.z,
+  colorscale: 'Portland',
+  type: 'heatmap'
+ }
+];
+var layout = {title: 'Portland'};
+Plotly.newPlot('myDiv', data, layout);
+});
+
 // Initiate a global variable of `data`
 var data;
 
@@ -75,11 +86,11 @@ function sampleCharts(idChoice) {
     var filterID1 = data.samples.filter(bactIDs => bactIDs.id == idChoice);
     var filterID = filterID1[0]
     var ouid = filterID.otu_ids;
-    var ouidSlice = filterID.otu_ids.slice(0, 10);
+    var ouidSlice = filterID.otu_ids.slice(0, 10).map(otuID => `OTU ${otuID}`).reverse();
     var seqRead = filterID.sample_values;
-    var seqReadSlice = filterID.sample_values.slice(0, 10);
+    var seqReadSlice = filterID.sample_values.slice(0, 10).reverse();
     var bacteriaName = filterID.otu_labels;
-    var bacteriaSlice = filterID.otu_labels.slice(0, 10);
+    var bacteriaSlice = filterID.otu_labels.slice(0, 10).reverse();
 
     var trace1 = {
         x: seqReadSlice,
@@ -92,12 +103,9 @@ function sampleCharts(idChoice) {
     var data = [trace1];
 
     var layout = {
-      title: "Top Ten OTUs Found",
+      title: "Top Ten Bacterias Found",
       xaxis: { title: "Count of Sequences Read"},
-      yaxis: {
-          autorange: "reversed", 
-          title: "OTU ID"
-      }
+      yaxis: { title: "OTU ID"}
     };
 
     Plotly.newPlot("bar", data, layout);
@@ -110,7 +118,8 @@ function sampleCharts(idChoice) {
       mode: "markers",
       marker: {
           color: ouid,
-          size: seqRead
+          size: seqRead,
+          colorscale: Portland
       },
       text: bacteriaName
     };
@@ -119,9 +128,10 @@ function sampleCharts(idChoice) {
     
     var layout2 = {
       title: 'Bacteria Frequency of Sequences Read per Subject',
-      showlegend: false,
-      height: 600,
-      width: 600
+      margin: { t: 0 },
+      hovermode: "closest",
+      xaxis: { title: "OTU ID" },
+      margin: { t: 30}
     };
     
     Plotly.newPlot("bubble", data2, layout2);
