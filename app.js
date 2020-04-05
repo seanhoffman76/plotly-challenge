@@ -19,17 +19,6 @@
  *      index 3 - otu_labels
  */
 
-Plotly.d3.json('https://raw.githubusercontent.com/plotly/datasets/master/custom_heatmap_colorscale.json', function(figure) {
-var data = [{
-  z: figure.z,
-  colorscale: 'Portland',
-  type: 'heatmap'
- }
-];
-var layout = {title: 'Portland'};
-Plotly.newPlot('myDiv', data, layout);
-});
-
 // Initiate a global variable of `data`
 var data;
 
@@ -118,8 +107,7 @@ function sampleCharts(idChoice) {
       mode: "markers",
       marker: {
           color: ouid,
-          size: seqRead,
-          colorscale: Portland
+          size: seqRead
       },
       text: bacteriaName
     };
@@ -175,7 +163,7 @@ function gaugePlot(idChoice) {
               { range: [9, 10], color: "#76FFFF" }
           ],
           threshold: {
-              line: { color: "red", width: 4 },
+              line: { color: "red", width: 10 },
               thickness: 0.75,
               value: washWeek
           }
