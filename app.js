@@ -140,11 +140,11 @@ function gaugePlot(idChoice) {
       value: washWeek,
       title: { text: "Navel Wash Frequency<br>Scrubs per Week", font: { size: 24 } },
       gauge: {
-          axis: { range: [1, 10],
+          axis: { range: [0, 10],
               tickvals: [0,1,2,3,4,5,6,7,8,9,10],
               tickwidth: 1, 
-              ticks: "outside",
-              tickcolor: "darkblue"
+              ticks: "inside",
+              tickcolor: "#B3B3B3"
               },
           bar: { color: "darkblue" },
           bgcolor: "white",
@@ -164,7 +164,7 @@ function gaugePlot(idChoice) {
           ],
           threshold: {
               line: { color: "red", width: 7 },
-              thickness: 0.75,
+              thickness: 0.85,
               value: washWeek
           }
         }
