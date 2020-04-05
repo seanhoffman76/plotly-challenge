@@ -130,7 +130,7 @@ function sampleCharts(idChoice) {
 // selected in the dropdown (idChoice)
 function gaugePlot(idChoice) {
   d3.json(link).then(data => {
-    var filterID1 = data.samples.filter(metaIDs => metaIDs.id == idChoice);
+    var filterID1 = data.metadata.filter(metaIDs => metaIDs.id == idChoice);
     var washWeek = filterID1[0].wfreq;
 
     var gaugeData = [
@@ -138,7 +138,7 @@ function gaugePlot(idChoice) {
       type: "indicator",
       mode: "gauge",
       value: washWeek,
-      title: { text: "<strong>Navel Wash Frequency</strong><br>Scrubs per Week", font: { size: 24 } },
+      title: { text: "Navel Wash Frequency<br>Scrubs per Week", font: { size: 24 } },
       gauge: {
           axis: { range: [1, 10],
               tickvals: [0,1,2,3,4,5,6,7,8,9,10],
@@ -163,7 +163,7 @@ function gaugePlot(idChoice) {
               { range: [9, 10], color: "#76FFFF" }
           ],
           threshold: {
-              line: { color: "red", width: 10 },
+              line: { color: "red", width: 7 },
               thickness: 0.75,
               value: washWeek
           }
